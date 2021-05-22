@@ -5,12 +5,14 @@ from time import time as current_time
 from BaseClock import BaseClock
 from ClockFace import ClockFace
 from Arrow import Arrow
+from Time import Time
 
 
 class AnalogClock(BaseClock):
     def __init__(self, *args):
         start_time = current_time()  # Нужно для компенсации потерь времени на инициализацию
         super().__init__(*args)
+        self.time = Time(self.time, limiter=(12, 60, 60))
         self._radius = min(self.size) // 2 * 0.95
         self._center = (self.location[0] + self.size[0] // 2,
                         self.location[1] + self.size[1] // 2)
@@ -18,7 +20,7 @@ class AnalogClock(BaseClock):
         self._hour_arrow = Arrow(self._center, self._radius // 3, self._radius / 20, self.time.hour, 12)
         self._minute_arrow = Arrow(self._center, self._radius * 0.65, self._radius / 30, self.time.minute, 60,
                                    self._hour_arrow)
-        self._second_arrow = Arrow(self._center, self._radius * 0.75, self._radius / 40, self.time.second, 60,
+        self._second_arrow = Arrow(self._center, self._radius * 0.75, self._radius / 40, round(self.time.second), 60,
                                    self._minute_arrow)
         # Компенсация потерь времени на инициализацию
         self.time += current_time() - start_time
@@ -41,7 +43,7 @@ class AnalogClock(BaseClock):
 
     def sync_arrows(self):
         """Устанавливает стрелки в соответствии с текущим временем"""
-        self._second_arrow.set_position(self.time.second)
+        self._second_arrow.set_position(round(self.time.second))
         self._minute_arrow.set_position(self.time.minute)
         self._hour_arrow.set_position(self.time.hour)
 

@@ -12,17 +12,17 @@ class Arrow:
         :param base: Координаты основания стрелки - кортеж вида (x, y)
         :param length: Длина стрелки
         :param width: Ширина стрелки
-        :param position: Текущее положение стрелки, вещественное число от нуля до positions_count
+        :param position: Текущее положение стрелки, целое число от нуля до positions_count
         :param positions_count: Количество положений, принимаемых стрелкой
         :param dependent_arrow: Зависимая стрелка. Будет сдвигаться на одну позицию каждый раз,
                                 когда эта стрелка проходит через своё нулевое состояние
         """
         assert length > 0 and isinstance(length, (int, float)), "length must be positive number"
         assert width > 0 and isinstance(width, (int, float)), "width must be positive number"
+        assert isinstance(positions_count, int), "Wrong argument type"
         self._base = base
         self.length = length
         self._width = width
-        self.position = position
         self.positions_count = positions_count
         self._dependent_arrow = dependent_arrow
         self._turtle = Turtle()  # У стрелки будет своя черепаха
@@ -31,7 +31,8 @@ class Arrow:
         self._side_length = math.hypot(self._width / 2, self.length)
         # Стрелка выглядит как равнобедренный треугольник.
         # _angle - угол при основании этого треугольника, _side_length - длина ребра
-        self._render()
+        self.position = 0
+        self.set_position(position)
 
     @can_exit_while_drawing
     def _render(self):
@@ -50,6 +51,7 @@ class Arrow:
         t.hideturtle()
 
     def set_position(self, position):
+        assert isinstance(position, int), "Wrong argument type"
         assert 0 <= position < self.positions_count, "Position out of range"
         if position == self.position:
             return

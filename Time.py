@@ -18,10 +18,10 @@ class Time:
         else:
             raise TypeError('Wrong argument type')
         assert type(hour) == int and type(minute) == int and type(second) in (int, float), 'Wrong argument type'
-        self.hour = hour
-        self.minute = minute
-        self.second = second
         self._limiter = limiter
+        self.hour = hour % self._limiter[0]
+        self.minute = minute % self._limiter[1]
+        self.second = second % self._limiter[2]
 
     def set_hour(self, hour):
         assert 0 <= hour < self._limiter[0], 'Too big value'
