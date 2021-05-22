@@ -1,4 +1,4 @@
-from AnalogClock import AnalogClock
+from analog_clock import AnalogClock
 import datetime
 
 

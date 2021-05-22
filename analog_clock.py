@@ -2,10 +2,10 @@ from time import sleep
 from threading import Thread
 from time import time as current_time
 
-from BaseClock import BaseClock
-from ClockFace import ClockFace
-from Arrow import Arrow
-from Time import Time
+from base_clock import BaseClock
+from clock_face import ClockFace
+from arrow import Arrow
+from clock_time import Time
 
 
 class AnalogClock(BaseClock):

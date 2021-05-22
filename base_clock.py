@@ -1,6 +1,6 @@
 from turtle import Turtle
 
-from Time import Time
+from clock_time import Time
 from utils import can_exit_while_drawing
 
 

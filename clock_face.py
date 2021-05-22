@@ -1,5 +1,5 @@
 from turtle import Turtle
-from ClockNumber import ClockNumber
+from clock_number import ClockNumber
 from math import sin, cos, pi
 
 from utils import can_exit_while_drawing

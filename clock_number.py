@@ -1,6 +1,6 @@
 from math import log10
 
-from ClockDigit import ClockDigit
+from clock_digit import ClockDigit
 
 
 class ClockNumber:
