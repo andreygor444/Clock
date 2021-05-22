@@ -12,7 +12,7 @@ class AnalogClock(BaseClock):
     def __init__(self, *args):
         start_time = current_time()  # Нужно для компенсации потерь времени на инициализацию
         super().__init__(*args)
-        self.time = Time(self.time, limiter=(12, 60, 60))
+        self.time = Time(self.time, limiter=(12, 60, 60, 1000))
         self._radius = min(self.size) // 2 * 0.95
         self._center = (self.location[0] + self.size[0] // 2,
                         self.location[1] + self.size[1] // 2)

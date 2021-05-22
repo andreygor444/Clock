@@ -1,5 +1,6 @@
 from turtle import Terminator
 from _tkinter import TclError
+from functools import reduce
 
 
 def can_exit_while_drawing(func):
@@ -14,3 +15,9 @@ def can_exit_while_drawing(func):
             raise SystemExit
 
     return new_func
+
+
+def product(sequence):
+    """Возвращает Произведение всех элементов полученной последовательности"""
+    assert isinstance(sequence, (list, tuple, set))
+    return reduce(lambda a, b: a * b, sequence)
