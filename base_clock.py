@@ -1,4 +1,5 @@
 from turtle import Turtle
+from time import sleep, time as current_time
 
 from clock_time import Time
 from utils import can_exit_while_drawing
@@ -22,6 +23,7 @@ class BaseClock:
         """Отрисовывает прямоугольный каркас часов"""
         t = Turtle()
         t.speed(0)
+        t.width(min(self.size[0] // 200, self.size[1] // 50))
         t.up()
         t.goto(self.location)
         t.down()
@@ -42,10 +44,20 @@ class BaseClock:
     def set_second(self, second):
         self.time.set_second(second)
 
-    def main_loop(self, update_interval=1, threaded=False):
+    def update(self):
+        """Обновлет отображение часов в соответствии с временем на часах"""
+
+    def main_loop(self, update_interval=1):
         """
         Основной цикл часов, в котором время бесконечно обновляется с некоторым интервалом
         :param update_interval: Интервал обновления времени
-        :param threaded: Запускает данный процесс в отдельном потоке
         """
-        pass
+        start_time = current_time()
+        while True:
+            while current_time() - start_time < update_interval * 0.9:
+                sleep(update_interval / 10)
+            while current_time() - start_time < update_interval:
+                sleep(update_interval / 100)
+            self.time += current_time() - start_time
+            start_time = current_time()
+            self.update()

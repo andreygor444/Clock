@@ -17,9 +17,9 @@ class Arrow:
         :param dependent_arrow: Зависимая стрелка. Будет сдвигаться на одну позицию каждый раз,
                                 когда эта стрелка проходит через своё нулевое состояние
         """
-        assert length > 0 and isinstance(length, (int, float)), "length must be positive number"
-        assert width > 0 and isinstance(width, (int, float)), "width must be positive number"
-        assert isinstance(positions_count, int), "Wrong argument type"
+        assert length > 0 and isinstance(length, (int, float)), 'length must be positive number'
+        assert width > 0 and isinstance(width, (int, float)), 'width must be positive number'
+        assert isinstance(positions_count, int), 'Wrong argument type'
         self._base = base
         self.length = length
         self._width = width
@@ -51,8 +51,8 @@ class Arrow:
         t.hideturtle()
 
     def set_position(self, position):
-        assert isinstance(position, int), "Wrong argument type"
-        assert 0 <= position < self.positions_count, "Position out of range"
+        assert isinstance(position, int), 'Wrong argument type'
+        assert 0 <= position < self.positions_count, 'Position out of range'
         if position == self.position:
             return
         self.position = position

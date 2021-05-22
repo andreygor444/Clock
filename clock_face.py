@@ -18,29 +18,24 @@ class ClockFace:
         """Отрисовывает круглый контур циферблата и точку в центре"""
         t = Turtle()
         t.speed(0)
+        t.width(self.radius // 80)
         t.up()
         t.goto((self._center[0], self._center[1] - self.radius))
         t.seth(0)
         t.down()
         t.circle(self.radius)
         t.up()
-        t.goto((self._center[0], self._center[1] - self.radius / 30))
+        t.goto((self._center[0], self._center[1]))
         t.down()
-        t.color('black', 'black')
-        t.begin_fill()
-        t.circle(self.radius / 30)
-        t.end_fill()
+        t.dot(self.radius / 15)
         t.hideturtle()
 
     def _make_numbers(self, numbers_count):
         self._numbers = []
         number_size = self.radius / 6
-        x_bias = self.radius * 0.05
-        y_bias = self.radius * 0.09
-        # Чтобы цифры стояли ровно, приходится их немного смещать вверх и вправо
         for i in range(1, numbers_count + 1):
             angle = pi * 2 / numbers_count * i
-            x = self._center[0] + self.radius * 0.8 * sin(angle) + x_bias
-            y = self._center[1] + self.radius * 0.8 * cos(angle) + y_bias
+            x = self._center[0] + self.radius * 0.8 * sin(angle)
+            y = self._center[1] + self.radius * 0.8 * cos(angle)
             number = ClockNumber(i, (x, y), number_size)
             self._numbers.append(number)
