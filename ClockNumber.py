@@ -1,11 +1,16 @@
-from turtle import Turtle
 from math import log10
 
 from ClockDigit import ClockDigit
 
 
 class ClockNumber:
+    """Представляет число на циферблате/экране часов"""
     def __init__(self, number, location: tuple, size: int = 30):
+        """
+        :param number: Само число, тип int
+        :param location: Координаты центра числа: кортеж вида (x, y)
+        :param size: Высота числа в пикселях
+        """
         self.number = number
         self.location = location
         self.height = size
